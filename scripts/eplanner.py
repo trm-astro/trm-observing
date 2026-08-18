@@ -384,7 +384,7 @@ if __name__ == "__main__":
 
     moon = get_body("moon", mjd_mid, location=site)
     sun = get_sun(mjd_mid)
-    elong = sun.separation(moon)
+    elong = sun.separation(moon, origin_mismatch="ignore")
     mphase = np.arctan2(
         sun.distance * np.sin(elong), moon.distance - sun.distance * np.cos(elong)
     )
@@ -443,7 +443,7 @@ if __name__ == "__main__":
 
         # Compute minimum distance to the Moon during period target is
         # above airmass limit
-        seps = moon.separation(star.position).degree[ok]
+        seps = moon.separation(star.position, origin_mismatch="ignore").degree[ok]
         if len(seps):
             sepmin = seps.min()
             moon_close = sepmin < args.mdist
@@ -622,7 +622,7 @@ if __name__ == "__main__":
 
         # Compute minimum distance to the Moon during period target
         # is above airmass limit
-        seps = moon.separation(star.position).degree[ok]
+        seps = moon.separation(star.position, origin_mismatch="ignore").degree[ok]
         if len(seps):
             sepmin = seps.min()
             moon_close = sepmin < args.mdist
@@ -686,7 +686,7 @@ if __name__ == "__main__":
             axr.text(
                 utc_last + 0.07,
                 y,
-                "${:d}^\circ$".format(int(round(sepmin))),
+                r"${:d}^\circ$".format(int(round(sepmin))),
                 ha="left",
                 va="center",
                 size=9 * args.csize,
