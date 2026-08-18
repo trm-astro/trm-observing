@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trm.observing"
+version = "1.1.6"
+description = "Python observing utility module"
+authors = [
+    {name = "Tom Marsh", email = "t.r.marsh@warwick.ac.uk"},
+    {name = "Stuart Littlefair", email = "s.littlefair@sheffield.ac.uk"},
+    {name = "Martin Dyer", email = "m.j.dyer@sheffield.ac.uk"},
+]
+readme = {text = """
+observing mainly provides a script to help schedule eclipses along
+with a few classes to help other build other scripts that need to use
+the position / ephemeris files.
+""", content-type = "text/plain"}
+requires-python = ">=3.8"
+dependencies = [
+    "numpy",
+    "astropy",
+    "matplotlib"
+]
+
+[project.urls]
+Homepage = "http://www.astro.warwick.ac.uk/"
+
+[tool.setuptools]
+script-files = ["scripts/eplanner.py", "scripts/parallactic.py"]
+
+[tool.setuptools.packages.find]
+include = ["trm*"]
+namespaces = true

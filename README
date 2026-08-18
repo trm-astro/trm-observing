@@ -9,15 +9,15 @@ and visibility periods of multiple targets.
 
 "parallactic.py" computes the parallactic angle of a given RA and Dec
 for an offset relative to the current time. Useful for spectroscopy.
-Installation is the usual
+Installation is via pip
 
-  python setup.py install --prefix=<installation directory>
+  pip install .
 
 or
 
-  python setup.py install --user
+  pip install --user .
 
-with the last part optional if you are root. 
+from the source directory.
 
 Only python3 is supported.
 
