@@ -9,17 +9,9 @@ a routine specific to the Thai telescope
 import math as m
 
 import numpy as np
-from astropy import coordinates as coord
 from astropy import time
 from astropy import units as u
-from astropy.coordinates import (
-    AltAz,
-    CartesianRepresentation,
-    SkyCoord,
-    get_moon,
-    get_sun,
-)
-from astropy.time import TimeISO
+from astropy.coordinates import AltAz, CartesianRepresentation, SkyCoord, get_sun
 
 # Longitude, latitude, height, zenith hole (deg) keyed by name
 SITES = {
