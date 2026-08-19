@@ -9,7 +9,7 @@ description = "Python observing utility module"
 authors = [
     {name = "Tom Marsh", email = "t.r.marsh@warwick.ac.uk"},
     {name = "Stuart Littlefair", email = "s.littlefair@sheffield.ac.uk"},
-    {name = "Martin Dyer", email = "m.j.dyer@sheffield.ac.uk"},
+    {name = "Martin Dyer", email = "martin.dyer@sheffield.ac.uk"},
 ]
 readme = {text = """
 observing mainly provides a script to help schedule eclipses along
