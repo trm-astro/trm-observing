@@ -663,7 +663,51 @@ if __name__ == "__main__":
                     )
 
                 # plot visibility period, highlighted if close to the Moon
-                axr.plot([utc_start, utc_end], [y, y], "--", color=col_moon)
+                if args.telescope != "TNT":
+                    # a single dashed line, the usual default
+                    axr.plot([utc_start, utc_end], [y, y], "--", color=col_moon)
+                else:
+                    # we want to highlight when the targets are above 45deg,
+                    # as that's the limit in high humidity
+                    start = True
+                    high_start = None
+                    high_end = None
+                    for alt, utc in zip(alts[ok], utcs[ok]):
+                        if alt > 45:
+                            if start:
+                                # start high period
+                                high_start = utc
+                                start = False
+                            else:
+                                # update end time of high period
+                                high_end = utc
+                    # Plot arrows & a dotted line when below 45deg
+                    width = (utcs[1] - utcs[0]) * 2
+                    if high_start is None:
+                        # never goes above 45deg, only dots and no arrows
+                        axr.plot([utc_start, utc_end], [y, y], ls="dotted", color=col_moon)
+                    else:
+                        # dashed line while in high period
+                        axr.plot([high_start, high_end], [y, y], "--", color=col_moon)
+
+                        if high_start != utc_start:
+                            # moves above 45deg after rising
+                            axr.plot(
+                                [high_start - width, high_start, high_start - width],
+                                [y - lbar / 2, y, y + lbar / 2],
+                                color=col_moon,
+                                zorder=20,
+                            )
+                            axr.plot([utc_start, high_start], [y, y], ls="dotted", color=col_moon)
+                        if high_end != utc_end:
+                            # moves below 45 deg before setting
+                            axr.plot(
+                                [high_end + width, high_end, high_end + width],
+                                [y - lbar / 2, y, y + lbar / 2],
+                                color=col_moon,
+                                zorder=20,
+                            )
+                            axr.plot([high_end, utc_end], [y, y], ls="dotted", color=col_moon)
                 axr.plot([utc_start, utc_start], [y - lbar, y + lbar], color=col_moon)
                 axr.plot([utc_end, utc_end], [y - lbar, y + lbar], color=col_moon)
 
